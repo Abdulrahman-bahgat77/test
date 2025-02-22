@@ -4,7 +4,7 @@ import pandas as pd
 # Initialize Flask app
 app = Flask(__name__)
 
-# Load the dataset
+
 data = pd.read_excel("/Users/Abdo/Desktop/task/model2/egypt_landmarks.xlsx")
 
 
@@ -20,7 +20,11 @@ def get_tourist_spots_with_details(province_name):
 
 
 # Define the API route
-@app.route('/tourist_spots', methods=['POST'])  # Change to POST
+@app.route('/')
+def home():
+    return  "tourist_Spots"
+
+@app.route('/tourist_spots', methods=['POST'])
 def tourist_spots():
     # Get the governorate name from the request body
     request_data = request.get_json()  # Parse JSON body
@@ -38,6 +42,6 @@ def tourist_spots():
         return jsonify({"governorate": province_name, "tourist_spots": places}), 200
 
 
-# Run the Flask app
+
 if __name__ == '__main__':
     app.run(debug=True)
